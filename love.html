@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>1996 - DengSir</title>
+    <title id="page-title">1996 - DengSir</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <!--<meta itemprop="image" content="./images/fenxiang.png" />-->
@@ -99,31 +99,48 @@
 <body>
 <!--更改为你女朋友的头像-->
 <div class="cs">
-    <img src="http://wx1.sinaimg.cn/large/006gFOhdly1fr0hdrzlolj30b40b4dg7.jpg" id="logo">
+    <img src="" id="logo">
 </div>
 <canvas class="canvas" width="1820" height="905"></canvas>
 <p class="text" style="color: #ed3073;">
-    We fell in love
+    <span id="span_love_text"></span>
     <br/>
     <span id="span_dt_dt"></span>
 </p>
 <script language="javascript">
+    /* =====================================================
+     * MODEL - 在这里修改所有自定义内容
+     * Customize all personalizable content here
+     * ===================================================== */
+    var MODEL = {
+        title: "1996 - DengSir",       // 页面标题 / Page title
+        avatarUrl: "http://wx1.sinaimg.cn/large/006gFOhdly1fr0hdrzlolj30b40b4dg7.jpg", // 头像图片地址 / Avatar image URL
+        loveText: "We fell in love",   // 爱情宣言 / Love declaration text
+        startDate: "2018-02-20T00:00:00", // 在一起的日期 / Relationship start date
+        sequence: "娜娜|I'm|ZLOE|Nice|to|Meet|You|#countdown 3|#time", // 文字序列 / Text animation sequence
+        musicUrl: "http://m10.music.126.net/20180509183512/5ae461e9a42675d782840bf139b05c60/ymusic/e492/ea7a/6a27/8799d19e52d9bbe3ae15febb03d7efdb.mp3" // 背景音乐地址 / Background music URL
+    };
+
+    // Apply MODEL values to the page
+    document.getElementById('page-title').textContent = MODEL.title;
+    document.getElementById('logo').src = MODEL.avatarUrl;
+    document.getElementById('span_love_text').textContent = MODEL.loveText;
+    document.querySelector('audio source').src = MODEL.musicUrl;
+
     function show_date_time() {
-        window.setTimeout("show_date_time()", 1000);
-        BirthDay = new Date("2/20/2018 00:00:00");//这个日期是可以修改的
-        today = new Date();
-        timeold = (today.getTime() - BirthDay.getTime());
-        sectimeold = timeold / 1000
-        secondsold = Math.floor(sectimeold);
-        msPerDay = 24 * 60 * 60 * 1000
-        e_daysold = timeold / msPerDay
-        daysold = Math.floor(e_daysold);
-        e_hrsold = (e_daysold - daysold) * 24;
-        hrsold = Math.floor(e_hrsold);
-        e_minsold = (e_hrsold - hrsold) * 60;
-        minsold = Math.floor((e_hrsold - hrsold) * 60);
-        seconds = Math.floor((e_minsold - minsold) * 60);
-        span_dt_dt.innerHTML = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
+        window.setTimeout(show_date_time, 1000);
+        var BirthDay = new Date(MODEL.startDate);
+        var today = new Date();
+        var timeold = today.getTime() - BirthDay.getTime();
+        var msPerDay = 24 * 60 * 60 * 1000;
+        var e_daysold = timeold / msPerDay;
+        var daysold = Math.floor(e_daysold);
+        var e_hrsold = (e_daysold - daysold) * 24;
+        var hrsold = Math.floor(e_hrsold);
+        var e_minsold = (e_hrsold - hrsold) * 60;
+        var minsold = Math.floor(e_minsold);
+        var seconds = Math.floor((e_minsold - minsold) * 60);
+        document.getElementById('span_dt_dt').innerHTML = daysold + "天" + hrsold + "小时" + minsold + "分" + seconds + "秒";
     }
 
     show_date_time();
@@ -133,8 +150,7 @@
         init: function () {
             S.Drawing.init('.canvas');
             document.body.classList.add('body--ready');
-			//想说的话
-            S.UI.simulate("娜娜|I'm|ZLOE|Nice|to|Meet|You|#countdown 3|#time");
+            S.UI.simulate(MODEL.sequence);
             S.Drawing.loop(function () {
                 S.Shape.render();
             });
@@ -669,7 +685,7 @@
 </script>
 //音乐可改
 <audio autoplay="autoplay" loop="loop">
-    <source src="http://m10.music.126.net/20180509183512/5ae461e9a42675d782840bf139b05c60/ymusic/e492/ea7a/6a27/8799d19e52d9bbe3ae15febb03d7efdb.mp3" type="audio/mpeg">
+    <source src="" type="audio/mpeg">
 </audio>
 </body>
 </html>
